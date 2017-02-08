@@ -1,0 +1,12 @@
+{
+    "id": "com.chengputech",
+    "name": {
+        "en": "Cooltouch"
+    },
+    "version": "0.0.1",
+    "compatibility": "1.x",
+    "author": {
+        "name": "Michael Orlov",
+        "email": "miklergm@gmail.com"
+    }
+}
