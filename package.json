@@ -1,0 +1,26 @@
+{
+  "name": "com.chengputech",
+  "version": "0.0.1",
+  "description": "Cooltouch switches for Homey",
+  "dependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-athom": "^0.0.3",
+    "homey-log": "^1.0.1",
+    "homey-zwavedriver": "git+https://github.com/athombv/node-homey-zwavedriver.git"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiklerGM/com.chengputech.git"
+  },
+  "keywords": [
+    "homey",
+    "z-wave"
+  ],
+  "author": "Michael Orlov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MiklerGM/com.chengputech/issues"
+  },
+  "homepage": "https://github.com/MiklerGM/com.chengputech#readme"
+}
