@@ -34,6 +34,7 @@
           "manufacturerId": 0,
           "productTypeId": 3,
           "productId": [ 2 ],
+          "associationGroups": [1, 2, 3],
           "multiChannelNodes": {
             "1": {
               "class": "light",
@@ -73,32 +74,6 @@
             }
           }
         }
-      },
-        {
-          "id": "1-gang",
-          "name": { "en": "Cooltouch 1-Gang Switch" },
-          "class": "light",
-          "capabilities": [ "onoff" ],
-          "settings": [
-            {
-              "id": "poll_interval",
-              "type": "number",
-              "attr": {
-                "min": 0,
-                "max": 3600
-              },
-              "value": 300,
-              "label": {
-                "en": "Poll Interval",
-                "nl": "Poll Interval"
-              }
-            }
-          ],
-          "zwave": {
-            "manufacturerId": 0,
-            "productTypeId": 3,
-            "productId": [ 2 ]
-          }
       }
     ]
 }
