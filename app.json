@@ -8,5 +8,97 @@
     "author": {
         "name": "Michael Orlov",
         "email": "miklergm@gmail.com"
-    }
+    },
+    "drivers": [{
+        "id": "3-gang",
+        "name": { "en": "Cooltouch 3-Gang Switch" },
+        "class": "light",
+        "capabilities": [ "onoff" ],
+
+        "settings": [
+          {
+            "id": "poll_interval",
+            "type": "number",
+            "attr": {
+              "min": 0,
+              "max": 3600
+            },
+            "value": 300,
+            "label": {
+              "en": "Poll Interval",
+              "nl": "Poll Interval"
+            }
+          }
+        ],
+        "zwave": {
+          "manufacturerId": 0,
+          "productTypeId": 3,
+          "productId": [ 2 ],
+          "multiChannelNodes": {
+            "1": {
+              "class": "light",
+              "capabilities": [
+                "onoff"
+              ],
+              "icon": "/drivers/3-gang/assets/icon-1.svg",
+              "name": {
+                "en": "Input 1",
+                "nl": "Ingang 1"
+              },
+              "settings": []
+            },
+            "2": {
+              "class": "light",
+              "capabilities": [
+                "onoff"
+              ],
+              "icon": "/drivers/3-gang/assets/icon-2.svg",
+              "name": {
+                "en": "Input 2",
+                "nl": "Ingang 2"
+              },
+              "settings": []
+            },
+            "3": {
+              "class": "light",
+              "capabilities": [
+                "onoff"
+              ],
+              "icon": "/drivers/3-gang/assets/icon-3.svg",
+              "name": {
+                "en": "Input 3",
+                "nl": "Ingang 3"
+              },
+              "settings": []
+            }
+          }
+        }
+      },
+        {
+          "id": "1-gang",
+          "name": { "en": "Cooltouch 1-Gang Switch" },
+          "class": "light",
+          "capabilities": [ "onoff" ],
+          "settings": [
+            {
+              "id": "poll_interval",
+              "type": "number",
+              "attr": {
+                "min": 0,
+                "max": 3600
+              },
+              "value": 300,
+              "label": {
+                "en": "Poll Interval",
+                "nl": "Poll Interval"
+              }
+            }
+          ],
+          "zwave": {
+            "manufacturerId": 0,
+            "productTypeId": 3,
+            "productId": [ 2 ]
+          }
+      }
+    ]
 }

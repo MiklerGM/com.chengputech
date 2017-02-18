@@ -1,9 +1,7 @@
-"use strict";
+'use strict';
 
-function init() {
-	
-	Homey.log("Hello world!");
-	
+const Log = require('homey-log').log;
+
+module.exports.init = function() {
+	Homey.log("com.chengputech running...");
 }
-
-module.exports.init = init;
