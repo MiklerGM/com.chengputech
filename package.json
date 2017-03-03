@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Cooltouch switches for Homey",
   "dependencies": {
-    "eslint": "^3.15.0",
+    "eslint": "^3.16.1",
     "eslint-config-athom": "^0.0.3",
-    "homey-log": "^1.0.1",
+    "homey-log": "^1.0.2",
     "homey-zwavedriver": "git+https://github.com/athombv/node-homey-zwavedriver.git"
   },
   "devDependencies": {},
