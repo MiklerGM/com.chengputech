@@ -11,9 +11,9 @@
     },
     "drivers": [{
         "id": "3-gang",
-        "name": { "en": "Cooltouch 3-Gang Switch" },
+        "name": { "en": "Cooltouch Switch" },
         "class": "light",
-        "capabilities": [ "onoff" ],
+        "capabilities": ["onoff", "onoff1", "onoff2", "onoff3"],
 
         "settings": [
           {
@@ -34,45 +34,7 @@
           "manufacturerId": 0,
           "productTypeId": 3,
           "productId": [ 2 ],
-          "associationGroups": [1, 2, 3],
-          "multiChannelNodes": {
-            "1": {
-              "class": "light",
-              "capabilities": [
-                "onoff"
-              ],
-              "icon": "/drivers/3-gang/assets/icon-1.svg",
-              "name": {
-                "en": "Input 1",
-                "nl": "Ingang 1"
-              },
-              "settings": []
-            },
-            "2": {
-              "class": "light",
-              "capabilities": [
-                "onoff"
-              ],
-              "icon": "/drivers/3-gang/assets/icon-2.svg",
-              "name": {
-                "en": "Input 2",
-                "nl": "Ingang 2"
-              },
-              "settings": []
-            },
-            "3": {
-              "class": "light",
-              "capabilities": [
-                "onoff"
-              ],
-              "icon": "/drivers/3-gang/assets/icon-3.svg",
-              "name": {
-                "en": "Input 3",
-                "nl": "Ingang 3"
-              },
-              "settings": []
-            }
-          }
+          "associationGroups": [1, 2, 3]
         }
       }
     ]
