@@ -205,12 +205,36 @@
           "components": [
             {
               "id": "toggle",
-              "capabilities": ["onoff.0", "onoff.1", "onoff.2", "onoff.3"],
+              "capabilities": ["onoff.0"],
               "options": {
                 "icons": {
-                  "onoff.0": "/drivers/3-gang/assets/icon-0.svg",
-                  "onoff.1": "/drivers/3-gang/assets/icon-1.svg",
-                  "onoff.2": "/drivers/3-gang/assets/icon-2.svg",
+                  "onoff.0": "/drivers/3-gang/assets/icon-0.svg"
+                }
+              }
+            },
+            {
+              "id": "toggle",
+              "capabilities": ["onoff.1"],
+              "options": {
+                "icons": {
+                  "onoff.1": "/drivers/3-gang/assets/icon-1.svg"
+                }
+              }
+            },
+            {
+              "id": "toggle",
+              "capabilities": ["onoff.2"],
+              "options": {
+                "icons": {
+                  "onoff.2": "/drivers/3-gang/assets/icon-2.svg"
+                }
+              }
+            }
+            ,{
+              "id": "toggle",
+              "capabilities": ["onoff.3"],
+              "options": {
+                "icons": {
                   "onoff.3": "/drivers/3-gang/assets/icon-3.svg"
                 }
               }
