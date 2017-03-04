@@ -9,12 +9,183 @@
         "name": "Michael Orlov",
         "email": "miklergm@gmail.com"
     },
+    "flow": {
+      "triggers": [
+        {
+          "id": "3-gang_i0_on",
+          "title": {
+            "en": "Input 0 opened",
+            "nl": "Ingang 0 geopend"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i0_off",
+          "title": {
+            "en": "Input 0 closed",
+            "nl": "Ingang 0 gesloten"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+       {
+          "id": "3-gang_i0_switch",
+          "title": {
+            "en": "Input 0 switched",
+            "nl": "Ingang 0 geschakeld"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+           }
+          ]
+       },
+       {
+          "id": "3-gang_i1_on",
+          "title": {
+            "en": "Input 1 opened",
+            "nl": "Ingang 1 geopend"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i1_off",
+          "title": {
+            "en": "Input 1 closed",
+            "nl": "Ingang 1 gesloten"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i1_switch",
+          "title": {
+            "en": "Input 1 switched",
+            "nl": "Ingang 1 geschakeld"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+           }
+          ]
+        },
+        {
+          "id": "3-gang_i2_on",
+          "title": {
+            "en": "Input 2 opened",
+            "nl": "Ingang 2 geopend"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i2_off",
+          "title": {
+            "en": "Input 2 closed",
+            "nl": "Ingang 2 gesloten"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i2_switch",
+          "title": {
+            "en": "Input 2 switched",
+            "nl": "Ingang 2 geschakeld"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+           }
+          ]
+        },
+        {
+          "id": "3-gang_i3_on",
+          "title": {
+            "en": "Input 3 opened",
+            "nl": "Ingang 3 geopend"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i3_off",
+          "title": {
+            "en": "Input 3 closed",
+            "nl": "Ingang 3 gesloten"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+            }
+          ]
+        },
+        {
+          "id": "3-gang_i3_switch",
+          "title": {
+            "en": "Input 3 switched",
+            "nl": "Ingang 3 geschakeld"
+          },
+          "args": [
+            {
+              "name": "device",
+              "type": "device",
+              "filter": "driver_id=3-gang"
+           }
+          ]
+        }
+      ]
+    },
     "drivers": [{
         "id": "3-gang",
         "name": { "en": "Cooltouch Switch" },
         "class": "light",
-        "capabilities": ["onoff", "onoff1", "onoff2", "onoff3"],
-
+        "capabilities": ["onoff.0", "onoff.1", "onoff.2", "onoff.3"],
         "settings": [
           {
             "id": "poll_interval",
@@ -30,6 +201,22 @@
             }
           }
         ],
+        "mobile": {
+          "components": [
+            {
+              "id": "toggle",
+              "capabilities": ["onoff.0", "onoff.1", "onoff.2", "onoff.3"],
+              "options": {
+                "icons": {
+                  "onoff.0": "/drivers/3-gang/assets/icon-0.svg",
+                  "onoff.1": "/drivers/3-gang/assets/icon-1.svg",
+                  "onoff.2": "/drivers/3-gang/assets/icon-2.svg",
+                  "onoff.3": "/drivers/3-gang/assets/icon-3.svg"
+                }
+              }
+            }
+          ]
+        },
         "zwave": {
           "manufacturerId": 0,
           "productTypeId": 3,
