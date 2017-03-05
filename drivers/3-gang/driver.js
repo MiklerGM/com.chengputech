@@ -5,10 +5,10 @@ const ZwaveDriver = require('homey-zwavedriver');
 
 const listOfCapabilities = ['onoff.0', 'onoff.1', 'onoff.2', 'onoff.3'];
 const deviceName = '3-gang';
+const timeout = 200;
 
 const triggerDeviceFlow = (node, capability, idx, result) => {
 	console.log('trigger', capability, idx, result);
-	// const postfix = result ? 'on' : 'off';
 	if (node
 		&& node.hasOwnProperty('state')
 		&& node.state.hasOwnProperty(capability)) {
@@ -68,33 +68,36 @@ module.exports.on('initNode', token => {
 	const node = module.exports.nodes[token];
 
 	if (node) {
-		// [1, 2, 3].map(ch => {
-		// 	if (typeof node.instance.MultichNodes[ch] !== 'undefined') {
-		// 		node.instance.MultiChannelNodes[ch]
-		// 			.CommandClass.COMMAND_CLASS_BASIC.on('report',
-		// 				(command, report) => {
-		// 					console.log('Multichannel report detected, channel', ch);
-		// 					console.log('Instance', node.instance);
-		// 					console.log('Command', command);
-		// 					console.log('Report', report);
-		// 					setTimeout(() => {
-		// 						node.instance
-		// 							.MultiChannelNodes[ch].CommandClass
-		// 							.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
-		// 					}, 200);
-		// 				}
-		// 			);
-		// 	}
-		// 	return true;
-		// });
+		// MultiChannelNodes report processing
+		if (node.instance.hasOwnProperty('MultiChannelNodes')
+			&& node.instance.MultiChannelNodes !== 'undefined') {
+			[1, 2, 3].map(ch => {
+				if (node.instance.MultiChannelNodes.hasOwnProperty(ch)
+					&& typeof node.instance.MultiChannelNodes[ch] !== 'undefined') {
+					node.instance.MultiChannelNodes[ch]
+						.CommandClass.COMMAND_CLASS_BASIC.on('report',
+							(command, report) => {
+								setTimeout(() => {
+									node.instance
+										.MultiChannelNodes[ch].CommandClass
+										.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
+								}, timeout);
+							}
+						);
+				}
+				return true;
+			});
+		}
+
+		// Basic Report
 		node.instance.CommandClass.COMMAND_CLASS_BASIC.on('report', (command, report) => {
 			console.log('Instance', node.instance);
 			console.log('Command', command);
 			if (command.name === 'BASIC_REPORT') {
-				// node.state.onoff = report['Current Value'] > 0;
 				setTimeout(() => {
-					node.instance.CommandClass.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
-				}, 200);
+					node.instance.CommandClass
+						.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
+				}, timeout);
 			}
 		});
 	}
@@ -108,7 +111,7 @@ listOfCapabilities.map((feature, idx) => {
 				if (node
 					&& node.hasOwnProperty('instance')
 					&& node.instance.hasOwnProperty('CommandClass')) {
-					
+
 					const command = setParser(newState === 'on' ? 255 : 0);
 					setTimeout(() => {
 						if (idx === 0) { // Switch_All
@@ -118,7 +121,7 @@ listOfCapabilities.map((feature, idx) => {
 							node.instance.MultiChannelNodes[idx].CommandClass
 								.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_SET(command);
 						}
-					}, 200);
+					}, timeout);
 				}
 				callback(null, true);
 			});
