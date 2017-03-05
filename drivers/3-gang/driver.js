@@ -17,6 +17,11 @@ const triggerDeviceFlow = (node, capability, idx, result) => {
 	}
 	return true;
 };
+const setParser = value => ({
+	'Target Value': (value > 0) ? 'on/enable' : 'off/disable',
+	Duration: 'Instantly',
+});
+
 const onoffCapability = (id) => {
 	console.log('onoffCap:', id);
 	const onoff = {
@@ -24,10 +29,7 @@ const onoffCapability = (id) => {
 		command_class: 'COMMAND_CLASS_SWITCH_BINARY',
 		command_get: 'SWITCH_BINARY_GET',
 		command_set: 'SWITCH_BINARY_SET',
-		command_set_parser: value => ({
-			'Target Value': (value > 0) ? 'on/enable' : 'off/disable',
-			Duration: 'Instantly',
-		}),
+		command_set_parser: setParser,
 		command_report: 'SWITCH_BINARY_REPORT',
 		pollInterval: 'poll_interval',
 	};
@@ -99,7 +101,30 @@ module.exports.on('initNode', token => {
 });
 
 listOfCapabilities.map((feature, idx) => {
-	console.log('Conditional callback', feature, idx);
+	['on', 'off'].map(newState => {
+		Homey.manager('flow').on(`action.${deviceName}_turn_i${idx}_${newState}`,
+			(callback, args) => {
+				const node = module.exports.nodes[args.device.token];
+				if (node
+					&& node.hasOwnProperty('instance')
+					&& node.instance.hasOwnProperty('CommandClass')) {
+					
+					const command = setParser(newState === 'on' ? 255 : 0);
+					setTimeout(() => {
+						if (idx === 0) { // Switch_All
+							node.instance.CommandClass
+								.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_SET(command);
+						} else { // MultiChannelNode
+							node.instance.MultiChannelNodes[idx].CommandClass
+								.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_SET(command);
+						}
+					}, 200);
+				}
+				callback(null, true);
+			});
+		return true;
+	});
+
 	Homey.manager('flow').on(`condition.${deviceName}_i${idx}`,
 		(callback, args) => {
 			console.log('Condition', args);
