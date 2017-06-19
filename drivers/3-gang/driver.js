@@ -66,6 +66,13 @@ module.exports = new ZwaveDriver(path.basename(__dirname), {
 
 module.exports.on('initNode', token => {
 	const node = module.exports.nodes[token];
+	const handleKeyReport = (ch, report) => {
+		console.log('Handling report', node.device_data);
+		const capability = `onoff.${ch}`;
+		const value = report['Current Value'] > 0;
+		module.exports.nodes[token].state[capability] = value;
+		module.exports.realtime(node.device_data, capability, value);
+	};
 
 	if (node) {
 		// MultiChannelNodes report processing
@@ -76,13 +83,9 @@ module.exports.on('initNode', token => {
 					&& typeof node.instance.MultiChannelNodes[ch] !== 'undefined') {
 					node.instance.MultiChannelNodes[ch]
 						.CommandClass.COMMAND_CLASS_BASIC.on('report',
-							(command, report) => {
-								setTimeout(() => {
-									node.instance
-										.MultiChannelNodes[ch].CommandClass
-										.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
-								}, timeout);
-							}
+							(command, report) => (
+								setTimeout(() => handleKeyReport(ch, report), timeout)
+							)
 						);
 				}
 				return true;
@@ -93,11 +96,9 @@ module.exports.on('initNode', token => {
 		node.instance.CommandClass.COMMAND_CLASS_BASIC.on('report', (command, report) => {
 			console.log('Instance', node.instance);
 			console.log('Command', command);
+			console.log('State', node.state);
 			if (command.name === 'BASIC_REPORT') {
-				setTimeout(() => {
-					node.instance.CommandClass
-						.COMMAND_CLASS_SWITCH_BINARY.SWITCH_BINARY_GET();
-				}, timeout);
+				setTimeout(() => handleKeyReport(0, report), timeout);
 			}
 		});
 	}
